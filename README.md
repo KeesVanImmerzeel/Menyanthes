@@ -13,6 +13,9 @@ You can install the released version of menyanthes from with:
 
 `install_github("KeesVanImmerzeel/menyanthes")`
 
+Then load the package with:
+
+`library("menyanthes")` 
 
 ## Example
 
