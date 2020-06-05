@@ -10,8 +10,6 @@
 #' @docType package
 #' @name menyanthes
 #'
-#' Package level import statements
-#'
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %>%
 #'
@@ -29,6 +27,12 @@
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
 #' @importFrom dplyr left_join
+#' @importFrom dplyr do
+#'
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 geom_point
+#' @importFrom ggplot2 ggtitle
 #'
 #' @importFrom stats quantile
 NULL

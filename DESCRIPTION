@@ -16,7 +16,8 @@ RoxygenNote: 7.1.0
 Imports: 
     magrittr,
     lubridate,
-    dplyr
+    dplyr,
+    ggplot2
 Depends: 
     R (>= 2.10)
 Suggests: 

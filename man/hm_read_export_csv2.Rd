@@ -18,7 +18,7 @@ List of 2:
 
 Variables in data.frame xm:
 \itemize{
-\item NAME Name of observationwell (character)
+\item NAME Name of observationwell.  (character)
 \item FILTER Filter number (integer)
 \item X x-coordinate of observationwell (numeric)
 \item Y y-coordinate of observationwell (numeric)
@@ -36,7 +36,7 @@ Variables in data.frame xd:
 }
 }
 \description{
-Read export HydroMonitor file with ObservationWell data with missing header.
+Trailing letters of observation well are removed.
 }
 \examples{
 fname <- system.file("extdata","Topsoil1.csv",package="menyanthes")
