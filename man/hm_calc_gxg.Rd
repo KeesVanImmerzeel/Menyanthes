@@ -2,7 +2,7 @@
 % Please edit documentation in R/hm_read_export_csv.R
 \name{hm_calc_gxg}
 \alias{hm_calc_gxg}
-\title{Calculate GxG's of HydroMonitor ObservationWell data}
+\title{Calculate GxG's of HydroMonitor ObservationWell data.}
 \usage{
 hm_calc_gxg(hm)
 }
@@ -10,10 +10,24 @@ hm_calc_gxg(hm)
 \item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
 }
 \value{
-xm: Characteristics of monitoring well (meta data in data frame) with GxG information added.
+Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}}) with the following fields added:
+\itemize{
+\item AHG 99,85 \% value of observed heads.
+\item MHG 97,7 \% value of observed heads.
+\item GHG 84,1 \% value of observed heads.
+\item GG 50\% value of observed heads.
+\item GLG 15,9\% value of observed heads.
+\item MLG 2,3\% value of observed heads.
+\item ALG 0,15\% value of observed heads.
+\item n Number of observations used to calculate percentile values.
+}
 }
 \description{
-Calculate GxG's of HydroMonitor ObservationWell data
+Percentile values of observed groundwater heads are calculated according to:
+}
+\details{
+\href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
+Stromingen 15 (2009) nummer 3 p29-34.}
 }
 \examples{
 fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")

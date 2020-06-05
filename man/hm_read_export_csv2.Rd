@@ -2,20 +2,41 @@
 % Please edit documentation in R/hm_read_export_csv.R
 \name{hm_read_export_csv2}
 \alias{hm_read_export_csv2}
-\title{Read export HydroMonitor file with ObservationWell data.}
+\title{Read export HydroMonitor file with ObservationWell data with missing header.}
 \usage{
 hm_read_export_csv2(fname)
 }
 \arguments{
-\item{fname}{Filename of export of HydroMonitor file with ObservationWell data (csv file, character)}
+\item{fname}{Filename of export of HydroMonitor file with Observationwell data (csv file, character)}
 }
 \value{
-List with two elements:
-xm: Characteristics of monitoring well (meta data in data frame)
-xd: Measured heads (data frame)
+List of 2:
+\itemize{
+\item xm Characteristics of the monitoring well (meta data).
+\item xd Measured heads (data.frame).
+}
+
+Variables in data.frame xm:
+\itemize{
+\item NAME Name of observationwell (character)
+\item FILTER Filter number (integer)
+\item X x-coordinate of observationwell (numeric)
+\item Y y-coordinate of observationwell (numeric)
+\item TOP Level of the top of filter (numeric)
+\item BOT Level of the bottom of filter (numeric)
+\item MV Surface level (numeric)
+}
+
+Variables in data.frame xd:
+\itemize{
+\item NAME Name of observationwell (character)
+\item FILTER Filter number (integer)
+\item DATE Date of observation (POSIXct)
+\item HEAD Observed head (numeric)
+}
 }
 \description{
-Read export HydroMonitor file with ObservationWell data.
+Read export HydroMonitor file with ObservationWell data with missing header.
 }
 \examples{
 fname <- system.file("extdata","Topsoil1.csv",package="menyanthes")

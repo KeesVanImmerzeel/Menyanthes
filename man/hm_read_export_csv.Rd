@@ -7,12 +7,33 @@
 hm_read_export_csv(fname)
 }
 \arguments{
-\item{fname}{Filename of export of HydroMonitor file with ObservationWell data (csv file, character)}
+\item{fname}{Filename of export of HydroMonitor file with Observationwell data (csv file, character)}
 }
 \value{
-List with two elements:
-xm: Characteristics of monitoring well (meta data in data frame)
-xd: Measured heads (data frame)
+List of 2:
+\itemize{
+\item xm Characteristics of the monitoring well (meta data).
+\item xd Measured heads (data.frame).
+}
+
+Variables in data.frame xm:
+\itemize{
+\item NAME Name of observationwell (character)
+\item FILTER Filter number (integer)
+\item X x-coordinate of observationwell (numeric)
+\item Y y-coordinate of observationwell (numeric)
+\item TOP Level of the top of filter (numeric)
+\item BOT Level of the bottom of filter (numeric)
+\item MV Surface level (numeric)
+}
+
+Variables in data.frame xd:
+\itemize{
+\item NAME Name of observationwell (character)
+\item FILTER Filter number (integer)
+\item DATE Date of observation (POSIXct)
+\item HEAD Observed head (numeric)
+}
 }
 \description{
 Read export HydroMonitor file with ObservationWell data.

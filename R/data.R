@@ -4,8 +4,8 @@
 #'
 "hm1"
 
-#' HydroMonitor ObservationWell Data
+#' HydroMonitor ObservationWell Data With Missing Header
 #'
-#' Sample dataset read with hm_read_export_csv2()
+#' Sample dataset read with hm_read_export_csv2(). First line is blank.
 #'
 "hm2"

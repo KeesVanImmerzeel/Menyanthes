@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of the package menyanthes is to read / write menyanthes data. 
+The goal of the package menyanthes is to read / write / manipulate [HydroMonitor](https://www.kwrwater.nl/tools-producten/hydromonitor/) Observationwell data. 
 
 ## Installation
 
@@ -17,12 +17,15 @@ Then load the package with:
 
 `library("menyanthes")` 
 
-## Example
+## Functions in this package
+- `hm_read_export_csv()`: Read export HydroMonitor file with ObservationWell data.
+- `hm_read_export_csv2()`: Read export HydroMonitor file with ObservationWell data with missing header.
+- `hm_filter_on_year()`: Filter HydroMonitor ObservationWell data on year.
+- `hm_calc_gxg()`: Calculate GxG's of HydroMonitor ObservationWell data.
 
-This is a basic example which shows you how to solve a common problem:
+## Get help
 
-``` r
-library(menyanthes)
-## basic example code..
-```
+To get help on the functions in this package type a question mark before the function name, like `?hm_read_export_csv()`
+
+
 

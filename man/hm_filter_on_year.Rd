@@ -14,7 +14,7 @@ hm_filter_on_year(hm, minyear = 1900, maxyear = 3000)
 \item{maxyear}{Maximal year to read data from (integer)}
 }
 \value{
-hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
+Filtered HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
 }
 \description{
 Filter HydroMonitor ObservationWell data on year.

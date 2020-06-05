@@ -1,16 +1,25 @@
 #' Read export HydroMonitor file with ObservationWell data.
 #'
-#' @param fname Filename of export of HydroMonitor file with ObservationWell data (csv file, character)
-#' @return List with two elements:
-#'         xm: Characteristics of monitoring well (meta data in data frame)
-#'         xd: Measured heads (data frame)
-#' @importFrom utils read.csv
-#' @importFrom utils read.csv2
-#' @importFrom lubridate dmy_hm
-#' @importFrom lubridate dmy_hms
-#' @importFrom magrittr %<>%
-#' @importFrom magrittr %>%
-#' @importFrom dplyr arrange
+#' @param fname Filename of export of HydroMonitor file with Observationwell data (csv file, character)
+#' @return List of 2:
+#'
+#' * xm Characteristics of the monitoring well (meta data).
+#' * xd Measured heads (data.frame).
+#'
+#' Variables in data.frame xm:
+#' * NAME Name of observationwell (character)
+#' * FILTER Filter number (integer)
+#' * X x-coordinate of observationwell (numeric)
+#' * Y y-coordinate of observationwell (numeric)
+#' * TOP Level of the top of filter (numeric)
+#' * BOT Level of the bottom of filter (numeric)
+#' * MV Surface level (numeric)
+#'
+#' Variables in data.frame xd:
+#' * NAME Name of observationwell (character)
+#' * FILTER Filter number (integer)
+#' * DATE Date of observation (POSIXct)
+#' * HEAD Observed head (numeric)
 #' @examples
 #' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
 #' hm1 <- hm_read_export_csv( fname )
@@ -66,12 +75,20 @@ hm_read_export_csv <- function(fname) {
   xm$V19 <- NULL
   names(xm) <- names_xm
   xm$FilterNo <- suppressWarnings(as.integer(xm$FilterNo))
-  xm <- xm[!is.na(xm$FilterNo), ]
+  xm <- xm[!is.na(xm$FilterNo),]
   xm$StartDateTime <- lubridate::dmy_hm(xm$StartDateTime)
 
   # Filter meta data on essential information
-  xm <- data.frame(NAME=xm$Name, FILTER=xm$FilterNo, X=xm$XCoordinate, Y=xm$YCoordinate,
-                   TOP= xm$FilterTopLevel, BOT=xm$FilterBottomLevel, MV=xm$SurfaceLevel )
+  xm <-
+    data.frame(
+      NAME = xm$Name,
+      FILTER = xm$FilterNo,
+      X = xm$XCoordinate,
+      Y = xm$YCoordinate,
+      TOP = xm$FilterTopLevel,
+      BOT = xm$FilterBottomLevel,
+      MV = xm$SurfaceLevel
+    )
   xm %<>% dplyr::arrange(NAME, FILTER)
 
   # Read Data
@@ -86,7 +103,7 @@ hm_read_export_csv <- function(fname) {
   )
   xd <- xd[, c(1, 2, 3, 4)]
   names(xd) <- c("NAME", "FILTER", "DATE", "HEAD")
-  xd <- xd[!is.na(xd$FILTER), ]
+  xd <- xd[!is.na(xd$FILTER),]
   xd$DATE <- lubridate::dmy_hms(xd$DATE)
 
   hm <- list()
@@ -95,18 +112,9 @@ hm_read_export_csv <- function(fname) {
   return(hm)
 }
 
-#' Read export HydroMonitor file with ObservationWell data.
+#' Read export HydroMonitor file with ObservationWell data with missing header.
 #'
-#' @inheritParams hm_read_export_csv
-#' @return List with two elements:
-#'         xm: Characteristics of monitoring well (meta data in data frame)
-#'         xd: Measured heads (data frame)
-#' @importFrom utils read.csv
-#' @importFrom utils read.csv2
-#' @importFrom lubridate dmy_hm
-#' @importFrom magrittr %<>%
-#' @importFrom magrittr %>%
-#' @importFrom dplyr arrange
+#' @inherit hm_read_export_csv
 #' @examples
 #' fname <- system.file("extdata","Topsoil1.csv",package="menyanthes")
 #' hm2 <- hm_read_export_csv2( fname )
@@ -172,12 +180,7 @@ hm_read_export_csv2 <- function(fname) {
 #' @param hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
 #' @param minyear Minimal year to read data from (integer)
 #' @param maxyear Maximal year to read data from (integer)
-#' @return hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
-#' @importFrom lubridate year
-#' @importFrom lubridate month
-#' @importFrom magrittr %<>%
-#' @importFrom dplyr filter
-#' @importFrom dplyr semi_join
+#' @return Filtered HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
 #' @examples
 #' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
 #' hm <- hm_read_export_csv( fname )
@@ -194,17 +197,22 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
   return(hm)
 }
 
-#' Calculate GxG's of HydroMonitor ObservationWell data
+#' Calculate GxG's of HydroMonitor ObservationWell data.
 #'
+#' Percentile values of observed groundwater heads are calculated according to:
+#'
+#' \href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
+#' Stromingen 15 (2009) nummer 3 p29-34.}
 #' @inheritParams hm_filter_on_year
-#' @return xm: Characteristics of monitoring well (meta data in data frame) with GxG information added.
-#' @importFrom magrittr %<>%
-#' @importFrom magrittr %>%
-#' @importFrom dplyr group_by
-#' @importFrom dplyr summarise
-#' @importFrom dplyr left_join
-#' @importFrom stats quantile
-#' @importFrom dplyr arrange
+#' @return Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}}) with the following fields added:
+#' * AHG 99,85 % value of observed heads.
+#' * MHG 97,7 % value of observed heads.
+#' * GHG 84,1 % value of observed heads.
+#' * GG 50% value of observed heads.
+#' * GLG 15,9% value of observed heads.
+#' * MLG 2,3% value of observed heads.
+#' * ALG 0,15% value of observed heads.
+#' * n Number of observations used to calculate percentile values.
 #' @examples
 #' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
 #' hm <- hm_read_export_csv( fname )
@@ -212,8 +220,6 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
 #' @export
 hm_calc_gxg <- function(hm) {
   # Bereken GxG's en voeg de waarden toe aan de gegevens van de peilbuizen.
-  # Ref 'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
-  # Stromingen 15 (2009) nummer 3 p29-34.
   AHG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(AHG=quantile(HEAD,.9985,na.rm = TRUE))
   MHG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(MHG=quantile(HEAD,.977,na.rm = TRUE))
   GHG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(GHG=quantile(HEAD,.841,na.rm = TRUE))
