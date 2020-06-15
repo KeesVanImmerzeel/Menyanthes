@@ -126,7 +126,7 @@ hm_plot <- function(hm) {
 hm_rbind <-function(hm1, hm2) {
   hm <- list()
   hm$xm <- rbind(hm1$xm,hm2$xm)
-  hm$xd <- rbind(hm1$dm,hm2$dm)
+  hm$xd <- rbind(hm1$xd,hm2$xd)
   return(hm)
 }
 
