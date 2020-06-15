@@ -6,6 +6,7 @@
 #' * \code{\link{hm_read_export_csv2}}
 #' * \code{\link{hm_filter_on_year}}
 #' * \code{\link{hm_calc_gxg}}
+#' * \code{\link{nr_obs_ratio}}
 #'
 #' @docType package
 #' @name menyanthes

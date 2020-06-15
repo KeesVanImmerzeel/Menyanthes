@@ -13,5 +13,6 @@ This package exports the following functions:
 \item \code{\link{hm_read_export_csv2}}
 \item \code{\link{hm_filter_on_year}}
 \item \code{\link{hm_calc_gxg}}
+\item \code{\link{nr_obs_ratio}}
 }
 }

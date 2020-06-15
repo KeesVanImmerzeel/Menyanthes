@@ -21,6 +21,31 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
   return(hm)
 }
 
+#' Ratio's (# observations in filter) / (average # of observations in monitoring well)
+#'
+#' @inheritParams hm_filter_on_year
+#' @return tible with fields:
+#' * NAME Name of observationwell (character vector)
+#' * FILTER Filter number (integer)
+#' * RATIO  Ratio (# observations in filter) / (average # of observations in monitoring well) (numeric)
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm <- hm_read_export_csv( fname )
+#' r <- nr_obs_ratio(hm)
+#' @export
+nr_obs_ratio <- function (hm) {
+  nf <-
+    hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(nf = dplyr::n())
+  n <-
+    hm$xd %>%  dplyr::group_by(NAME) %>% dplyr::summarise(nmean = dplyr::n() /
+                                                         dplyr::n_distinct(FILTER))
+  x <- dplyr::left_join(nf, n)
+  x$RATIO <- x$nf / x$nmean
+  x$nf <- NULL
+  x$nmean <- NULL
+  return( x )
+}
+
 #' Calculate GxG's of HydroMonitor ObservationWell data.
 #'
 #' Percentile values of observed groundwater heads are calculated according to:
@@ -53,6 +78,7 @@ hm_calc_gxg <- function(hm) {
   ALG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(ALG=quantile(HEAD,.0015,na.rm = TRUE),n=n())
   hm$xm %<>% dplyr::left_join(AHG) %>% dplyr::left_join(MHG) %>% dplyr::left_join(GHG) %>% dplyr::left_join(GG) %>% dplyr::left_join(GLG) %>%
     dplyr::left_join(MLG) %>% dplyr::left_join(ALG)
+
   hm$xm %<>% dplyr::arrange(NAME, FILTER)
   return(hm$xm)
 }
@@ -83,4 +109,25 @@ hm_plot <- function(hm) {
     )
   )
 }
+
+#' Merge two HydroMonitor ObservationWell data objects.
+#'
+#' Bind rows of two HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
+#'
+#' @param hm1 First HydroMonitor ObservationWell data object to be merged.
+#' @param hm2 Second HydroMonitor ObservationWell data object to be merged.
+#' @return HydroMonitor ObservationWell data object.
+#'
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm1 <- hm_read_export_csv( fname )
+#'
+#' @export
+hm_rbind <-function(hm1, hm2) {
+  hm <- list()
+  hm$xm <- rbind(hm1$xm,hm2$xm)
+  hm$xd <- rbind(hm1$dm,hm2$dm)
+  return(hm)
+}
+
 

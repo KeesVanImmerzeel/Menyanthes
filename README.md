@@ -22,6 +22,8 @@ Then load the package with:
 - `hm_read_export_csv2()`: Read export HydroMonitor file with ObservationWell data with missing header.
 - `hm_filter_on_year()`: Filter HydroMonitor ObservationWell data on year.
 - `hm_calc_gxg()`: Calculate GxG's of HydroMonitor ObservationWell data.
+- `hm_plot()`: Plot HydroMonitor ObservationWell data.
+- `nr_obs_ratio()`: Ratio's (# observations in filter) / (average # of observations in monitoring well)
 
 ## Get help
 
