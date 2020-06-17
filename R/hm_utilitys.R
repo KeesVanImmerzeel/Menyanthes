@@ -1,10 +1,24 @@
 
-#' Filter HydroMonitor ObservationWell data on year.
+#' Remove meta data of filters if there are no observations available.
 #'
 #' @param hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
+#' @return HydroMonitor ObservationWell data where in meta data filters with no observations are removed.
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm <- hm_read_export_csv( fname )
+#' hm_clean <- hm_rm_fltrs_with_no_obs( hm )
+#' @export
+hm_rm_fltrs_with_no_obs <- function( hm ) {
+  hm$xm %<>% dplyr::semi_join(unique(hm$xd[,c('NAME','FILTER')]))
+  return(hm)
+}
+
+#' Filter HydroMonitor ObservationWell data on year.
+#'
+#' @inheritParams hm_rm_fltrs_with_no_obs
 #' @param minyear Minimal year to read data from (integer)
 #' @param maxyear Maximal year to read data from (integer)
-#' @return Filtered HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
+#' @return Filtered HydroMonitor ObservationWell data
 #' @examples
 #' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
 #' hm <- hm_read_export_csv( fname )
@@ -16,14 +30,44 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
   #Filter stijghoogte gegevens
   hm$xd %<>% dplyr::filter(YEAR >= minyear & YEAR <= maxyear)
 
-  #Verwijder peilbuizen waar geen stijghoogten bekend zijn in de gefilterde stijghoogte gegevens
+  #Verwijder peilbuizen uit meta data waar geen stijghoogten bekend zijn in de gefilterde stijghoogte gegevens.
+  hm %<>% hm_rm_fltrs_with_no_obs()
+  return(hm)
+}
+
+#' Remove double filter information in meta data part of HydroMonitor ObservationWell data
+#' @inheritParams hm_rm_fltrs_with_no_obs
+#' @return HydroMonitor ObservationWell data with double filter information remove from meta data part of
+#'   HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm <- hm_read_export_csv( fname )
+#' hm_clean <- hm_rm_dble_fltrs( hm )
+#' @export
+hm_rm_dble_fltrs <- function( hm ){
+  hm$xm %<>% dplyr::distinct(NAME,FILTER, .keep_all = TRUE)
+  return(hm)
+}
+
+#' Remove double observations in HydroMonitor ObservationWell data.
+#'
+#' @inheritParams hm_rm_fltrs_with_no_obs
+#' @return HydroMonitor ObservationWell data with double records removed.
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm <- hm_read_export_csv( fname )
+#' hm_clean <- hm_rm_dble_obs( hm )
+#' @export
+hm_rm_dble_obs <- function(hm) {
+  hm$xd %<>% dplyr::distinct(NAME,FILTER,DATE, .keep_all = TRUE)
+  #Verwijder peilbuizen uit meta data waar geen stijghoogten bekend zijn in de gefilterde stijghoogte gegevens
   hm$xm %<>% dplyr::semi_join(unique(hm$xd[,c('NAME','FILTER')]))
   return(hm)
 }
 
 #' Ratio's (# observations in filter) / (average # of observations in monitoring well)
 #'
-#' @inheritParams hm_filter_on_year
+#' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return tible with fields:
 #' * NAME Name of observationwell (character vector)
 #' * FILTER Filter number (integer)
@@ -52,7 +96,7 @@ nr_obs_ratio <- function (hm) {
 #'
 #' \href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
 #' Stromingen 15 (2009) nummer 3 p29-34.}
-#' @inheritParams hm_filter_on_year
+#' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}}) with the following fields added:
 #' * AHG 99,85 % value of observed heads.
 #' * MHG 97,7 % value of observed heads.
@@ -87,7 +131,7 @@ hm_calc_gxg <- function(hm) {
 #'
 #' Create a list of timeseries plots of all HydroMonitor Observationwell data.
 #'
-#' @inheritParams hm_filter_on_year
+#' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return tibble. Fields:
 #'
 #' * NAME Name of observationwell (character vector)
@@ -127,6 +171,7 @@ hm_rbind <-function(hm1, hm2) {
   hm <- list()
   hm$xm <- rbind(hm1$xm,hm2$xm)
   hm$xd <- rbind(hm1$xd,hm2$xd)
+  hm %<>% hm_rm_dble_obs() %>% hm_rm_dble_fltrs()
   return(hm)
 }
 
