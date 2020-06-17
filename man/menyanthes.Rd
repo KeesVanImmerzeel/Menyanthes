@@ -12,6 +12,11 @@ This package exports the following functions:
 \item \code{\link{hm_read_export_csv}}
 \item \code{\link{hm_read_export_csv2}}
 \item \code{\link{hm_filter_on_year}}
+\item \code{\link{hm_rm_fltrs_with_no_obs}}
+\item \code{\link{hm_rbind}}
+\item \code{\link{hm_rm_dble_fltrs}}
+\item \code{\link{hm_rm_dble_obs}}
+\item \code{\link{hm_plot}}
 \item \code{\link{hm_calc_gxg}}
 \item \code{\link{nr_obs_ratio}}
 }

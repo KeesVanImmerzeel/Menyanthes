@@ -5,6 +5,11 @@
 #' * \code{\link{hm_read_export_csv}}
 #' * \code{\link{hm_read_export_csv2}}
 #' * \code{\link{hm_filter_on_year}}
+#' * \code{\link{hm_rm_fltrs_with_no_obs}}
+#' * \code{\link{hm_rbind}}
+#' * \code{\link{hm_rm_dble_fltrs}}
+#' * \code{\link{hm_rm_dble_obs}}
+#' * \code{\link{hm_plot}}
 #' * \code{\link{hm_calc_gxg}}
 #' * \code{\link{nr_obs_ratio}}
 #'
