@@ -17,7 +17,8 @@ tibble. Fields:
 }
 }
 \description{
-Create a list of timeseries plots of all HydroMonitor Observationwell data.
+Create a list of timeseries plots of all HydroMonitor Observationwell data
+(\code{\link{hm_read_export_csv}}).
 }
 \examples{
 fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")

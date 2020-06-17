@@ -1,3 +1,5 @@
+# Internal data definition
+# crsAfoort <- sp::CRS("+init=epsg:28992") # epsg projection 28992 - amersfoort
 
 #' Remove meta data of filters if there are no observations available.
 #'
@@ -129,7 +131,8 @@ hm_calc_gxg <- function(hm) {
 
 #' Plot HydroMonitor ObservationWell data.
 #'
-#' Create a list of timeseries plots of all HydroMonitor Observationwell data.
+#' Create a list of timeseries plots of all HydroMonitor Observationwell data
+#' (\code{\link{hm_read_export_csv}}).
 #'
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return tibble. Fields:
@@ -175,4 +178,23 @@ hm_rbind <-function(hm1, hm2) {
   return(hm)
 }
 
+#' Create a shape file from HydroMonitor ObservationWell data object.
+#'
+#' Create a shape file from the meta data part of HydroMonitor ObservationWell data object
+#' (\code{\link{hm_read_export_csv}}).
+#' @inheritParams hm_rm_fltrs_with_no_obs
+#' @param filename (character)
+#' @return  Nothing is returned when writing a shapeﬁle.
+#' @examples
+#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
+#' hm <- hm_read_export_csv( fname )
+#' filename <- file.path(path.expand("~"),"filename.shp")
+#' hm_create_shp_file(hm, filename)
+#' @export
+hm_create_shp_file <- function(hm, filename ){
+  x <- hm$xm
+  sp::coordinates(x) <- ~X+Y
+  sp::proj4string(x) <- crsAfoort
+  raster::shapefile(x, filename, overwrite = TRUE)
+}
 

@@ -11,6 +11,7 @@
 #' * \code{\link{hm_rm_dble_obs}}
 #' * \code{\link{hm_plot}}
 #' * \code{\link{hm_calc_gxg}}
+#' * \code{\link{hm_create_shp_file}}
 #' * \code{\link{nr_obs_ratio}}
 #'
 #' @docType package
@@ -41,4 +42,10 @@
 #' @importFrom ggplot2 ggtitle
 #'
 #' @importFrom stats quantile
+#'
+#' @importFrom sp coordinates
+#' @importFrom sp proj4string
+#'
+#' @importFrom raster shapefile
+#'
 NULL

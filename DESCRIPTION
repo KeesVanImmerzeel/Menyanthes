@@ -17,7 +17,10 @@ Imports:
     magrittr,
     lubridate,
     dplyr,
-    ggplot2
+    ggplot2,
+    raster,
+    sp,
+    rgdal
 Depends: 
     R (>= 2.10)
 Suggests: 
