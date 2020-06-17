@@ -129,12 +129,13 @@ hm_calc_gxg <- function(hm) {
   return(hm$xm)
 }
 
-#' Plot HydroMonitor ObservationWell data.
+#' Plot HydroMonitor ObservationWell data and optionally save plots to specified folder.
 #'
 #' Create a list of timeseries plots of all HydroMonitor Observationwell data
 #' (\code{\link{hm_read_export_csv}}).
 #'
 #' @inheritParams hm_rm_fltrs_with_no_obs
+#' @param output_dir folder name to write plot (character). If NULL, plots are not written do disk.
 #' @return tibble. Fields:
 #'
 #' * NAME Name of observationwell (character vector)
@@ -147,14 +148,27 @@ hm_calc_gxg <- function(hm) {
 #' x$NAME[1]
 #' x$plots[[1]]
 #' @export
-hm_plot <- function(hm) {
+hm_plot <- function(hm, output_dir = NULL) {
   hm$xd$FILTER %<>% as.factor()
-  suppressWarnings(
+  x <- suppressWarnings(
     hm$xd %>% dplyr::group_by(NAME) %>% dplyr::do(
       plots = ggplot2::ggplot(data = .) +
-        ggplot2::aes(x = DATE, y = HEAD, color = FILTER) + ggplot2::geom_point() + ggplot2::ggtitle(unique(.$NAME))
+        ggplot2::aes(x = DATE, y = HEAD, color = FILTER) +
+        ggplot2::geom_point() +
+        ggplot2::ggtitle(unique(.$NAME))
     )
   )
+  if (!is.null(output_dir)) {
+    if (!dir.exists(output_dir)) {
+      dir.create(output_dir)
+    }
+    n <- length(x$NAME)
+    for (i in 1:n) {
+      mypath <- file.path(output_dir, paste(x$NAME[i], ".jpg", sep = ""))
+      ggplot2::ggsave(filename = mypath, x$plots[[i]])
+    }
+  }
+  return(x)
 }
 
 #' Merge two HydroMonitor ObservationWell data objects.

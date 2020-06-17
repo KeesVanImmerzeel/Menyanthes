@@ -40,6 +40,7 @@
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 geom_point
 #' @importFrom ggplot2 ggtitle
+#' @importFrom ggplot2 ggsave
 #'
 #' @importFrom stats quantile
 #'

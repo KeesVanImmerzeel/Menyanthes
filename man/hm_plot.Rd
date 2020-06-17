@@ -2,12 +2,14 @@
 % Please edit documentation in R/hm_utilitys.R
 \name{hm_plot}
 \alias{hm_plot}
-\title{Plot HydroMonitor ObservationWell data.}
+\title{Plot HydroMonitor ObservationWell data and optionally save plots to specified folder.}
 \usage{
-hm_plot(hm)
+hm_plot(hm, output_dir = NULL)
 }
 \arguments{
 \item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+
+\item{output_dir}{folder name to write plot (character). If NULL, plots are not written do disk.}
 }
 \value{
 tibble. Fields:
