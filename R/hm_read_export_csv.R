@@ -125,6 +125,9 @@ hm_read_export_csv <- function(fname) {
   hm <- list()
   hm$xm <- xm
   hm$xd <- xd
+  # Remove double filters and observations
+  hm %<>% hm_rm_dble_fltrs()
+  hm %<>% hm_rm_dble_obs()
   return(hm)
 }
 
@@ -194,6 +197,10 @@ hm_read_export_csv2 <- function(fname) {
   hm <- list()
   hm$xm <- xm
   hm$xd <- xd
+
+  # Remove double filters and observations
+  hm %<>% hm_rm_dble_fltrs()
+  hm %<>% hm_rm_dble_obs()
   return(hm)
 }
 
