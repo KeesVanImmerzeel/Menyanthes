@@ -38,7 +38,7 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
 #' Filter HydroMonitor ObservationWell data on extent.
 #'
 #' @inheritParams hm_rm_fltrs_with_no_obs
-#' @param e: Extent object or a Raster* or Spatial* object
+#' @param e Extent object or a Raster* or Spatial* object
 #' @return Filtered HydroMonitor ObservationWell data
 #' @examples
 #' hm <- hm1
