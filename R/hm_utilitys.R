@@ -6,8 +6,7 @@
 #' @param hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
 #' @return HydroMonitor ObservationWell data where in meta data filters with no observations are removed.
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' hm_clean <- hm_rm_fltrs_with_no_obs( hm )
 #' @export
 hm_rm_fltrs_with_no_obs <- function( hm ) {
@@ -22,8 +21,7 @@ hm_rm_fltrs_with_no_obs <- function( hm ) {
 #' @param maxyear Maximal year to read data from (integer)
 #' @return Filtered HydroMonitor ObservationWell data
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' hm_filtered <- hm_filter_on_year( hm, minyear=2000)
 #' @export
 hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
@@ -42,8 +40,7 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
 #' @return HydroMonitor ObservationWell data with double filter information remove from meta data part of
 #'   HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' hm_clean <- hm_rm_dble_fltrs( hm )
 #' @export
 hm_rm_dble_fltrs <- function( hm ){
@@ -56,8 +53,7 @@ hm_rm_dble_fltrs <- function( hm ){
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return HydroMonitor ObservationWell data with double records removed.
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' hm_clean <- hm_rm_dble_obs( hm )
 #' @export
 hm_rm_dble_obs <- function(hm) {
@@ -75,8 +71,7 @@ hm_rm_dble_obs <- function(hm) {
 #' * FILTER Filter number (integer)
 #' * RATIO  Ratio (# observations in filter) / (average # of observations in monitoring well) (numeric)
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' r <- nr_obs_ratio(hm)
 #' @export
 nr_obs_ratio <- function (hm) {
@@ -96,21 +91,22 @@ nr_obs_ratio <- function (hm) {
 #'
 #' Percentile values of observed groundwater heads are calculated according to:
 #'
+#' @seealso \code{link{hm_gxg_table}}
 #' \href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
 #' Stromingen 15 (2009) nummer 3 p29-34.}
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}}) with the following fields added:
-#' * AHG 99,85 % value of observed heads.
-#' * MHG 97,7 % value of observed heads.
-#' * GHG 84,1 % value of observed heads.
-#' * GG 50% value of observed heads.
-#' * GLG 15,9% value of observed heads.
-#' * MLG 2,3% value of observed heads.
-#' * ALG 0,15% value of observed heads.
+#' * AHG & AHG_MV 99,85 % value of observed heads (relative to REF, relative to soil surface level).
+#' * MHG & MHG_MV 97,7 % value of observed heads (relative to REF, relative to soil surface level).
+#' * GHG & GHG_MV  84,1 % value of observed head (relative to REF, relative to soil surface level).
+#' * GG & GG_MV 50% value of observed heads (relative to REF, relative to soil surface level).
+#' * GLG & GLG_MV 15,9% value of observed heads (relative to REF, relative to soil surface level).
+#' * MLG & MLG_MV 2,3% value of observed heads (relative to REF, relative to soil surface level).
+#' * ALG & ALG_MV 0,15% value of observed heads (relative to REF, relative to soil surface level).
 #' * n Number of observations used to calculate percentile values.
+#' @details GxG's of observations of every filter is calculated.
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' gxg <- hm_calc_gxg(hm)
 #' @export
 hm_calc_gxg <- function(hm) {
@@ -121,12 +117,33 @@ hm_calc_gxg <- function(hm) {
   GG  <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(GG=quantile(HEAD,.5,na.rm = TRUE))
   GLG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(GLG=quantile(HEAD,.159,na.rm = TRUE))
   MLG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(MLG=quantile(HEAD,.023,na.rm = TRUE))
-  ALG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(ALG=quantile(HEAD,.0015,na.rm = TRUE),n=n())
+  ALG <- hm$xd %>% dplyr::group_by(NAME, FILTER) %>% dplyr::summarise(ALG=quantile(HEAD,.0015,na.rm = TRUE),n=dplyr::n())
   hm$xm %<>% dplyr::left_join(AHG) %>% dplyr::left_join(MHG) %>% dplyr::left_join(GHG) %>% dplyr::left_join(GG) %>% dplyr::left_join(GLG) %>%
     dplyr::left_join(MLG) %>% dplyr::left_join(ALG)
+  hm$xm %<>% dplyr::mutate(AHG_MV = MV-AHG)
+  hm$xm %<>% dplyr::mutate(MHG_MV = MV-MHG)
+  hm$xm %<>% dplyr::mutate(GHG_MV = MV-GHG)
+  hm$xm %<>% dplyr::mutate(GG_MV = MV-GG)
+  hm$xm %<>% dplyr::mutate(GLG_MV = MV-GLG)
+  hm$xm %<>% dplyr::mutate(MLG_MV = MV-MLG)
+  hm$xm %<>% dplyr::mutate(ALG_MV = MV-ALG)
 
   hm$xm %<>% dplyr::arrange(NAME, FILTER)
   return(hm$xm)
+}
+
+#' Calculate GxG table based on head observations in top filters of HydroMonitor ObservationWell data.
+#'
+#' @seealso \code{link{hm_calc_gxg}}
+#' @inheritParams hm_rm_fltrs_with_no_obs
+#' @return Tibble with parameters as specified in \code{link{hm_calc_gxg}}.
+#' @examples
+#' hm <- hm1
+#' gxg <- hm_gxg_table(hm)
+#' @export
+hm_gxg_table <- function(hm) {
+  gxg_s <- hm %>% hm_calc_gxg() %>% dplyr::group_by(NAME) %>% dplyr::slice(which.min(FILTER))
+  return( gxg_s[,!names(gxg_s) %in% c("X","Y","TOP","BOT","MV")])
 }
 
 #' Plot HydroMonitor ObservationWell data and optionally save plots to specified folder.
@@ -142,8 +159,7 @@ hm_calc_gxg <- function(hm) {
 #' * plots List of timeseries plots (ggplot object)
 #'
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' x <- hm_plot(hm)
 #' x$NAME[1]
 #' x$plots[[1]]
@@ -211,21 +227,39 @@ hm_rbind <- function(..., hm_list = NULL) {
 
 #' Create a shape file from HydroMonitor ObservationWell data object.
 #'
-#' Create a shape file from the meta data part of HydroMonitor ObservationWell data object
+#' Create a summarizing shape file from the meta data part of HydroMonitor ObservationWell data object.
+#'
 #' (\code{\link{hm_read_export_csv}}).
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @param filename (character)
 #' @return  Nothing is returned when writing a shapeﬁle.
+#' @details Fields in the attribute table of the resulting shapefile are:
+#'
+#' * NAME: Name of observationwell.
+#' * X: X-coordinate of the observationwell.
+#' * Y: Y-coordinate of the observationwell.
+#' * NFILTERS: Number of filters.
+#' * TOP: Level of the top of the highest filter.
+#' * BOT: Level of the bottom of the lowest filter.
+#' * MV: Surface level.
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm <- hm_read_export_csv( fname )
+#' hm <- hm1
 #' filename <- file.path(path.expand("~"),"filename.shp")
-#' hm_create_shp_file(hm, filename)
+#' hm_create_shp(hm, filename)
 #' @export
-hm_create_shp_file <- function(hm, filename ){
-  x <- hm$xm
-  sp::coordinates(x) <- ~X+Y
+hm_create_shp <- function(hm, filename) {
+  gxg_table <- hm %>% hm_gxg_table()
+
+  x <- hm$xm %>% dplyr::group_by(NAME) %>% dplyr::summarise(
+    X = mean(X),
+    Y = mean(Y),
+    NFILTRS = dplyr::n(),
+    TOP = max(TOP),
+    BOT = min(BOT),
+    MV = mean(MV, na.rm = TRUE)
+  )
+  x %<>% dplyr::left_join(gxg_table,by="NAME")
+  sp::coordinates(x) <- ~ X + Y
   sp::proj4string(x) <- crsAfoort
   raster::shapefile(x, filename, overwrite = TRUE)
 }
-

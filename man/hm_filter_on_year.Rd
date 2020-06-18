@@ -20,7 +20,6 @@ Filtered HydroMonitor ObservationWell data
 Filter HydroMonitor ObservationWell data on year.
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 hm_filtered <- hm_filter_on_year( hm, minyear=2000)
 }

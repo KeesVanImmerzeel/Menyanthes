@@ -16,7 +16,6 @@ HydroMonitor ObservationWell data where in meta data filters with no observation
 Remove meta data of filters if there are no observations available.
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 hm_clean <- hm_rm_fltrs_with_no_obs( hm )
 }

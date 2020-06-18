@@ -17,7 +17,6 @@ HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
 Remove double filter information in meta data part of HydroMonitor ObservationWell data
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 hm_clean <- hm_rm_dble_fltrs( hm )
 }

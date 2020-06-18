@@ -18,7 +18,7 @@ This package exports the following functions:
 \item \code{\link{hm_rm_dble_obs}}
 \item \code{\link{hm_plot}}
 \item \code{\link{hm_calc_gxg}}
-\item \code{\link{hm_create_shp_file}}
+\item \code{\link{hm_create_shp}}
 \item \code{\link{nr_obs_ratio}}
 }
 

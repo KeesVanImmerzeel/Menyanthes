@@ -12,13 +12,13 @@ hm_calc_gxg(hm)
 \value{
 Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}}) with the following fields added:
 \itemize{
-\item AHG 99,85 \% value of observed heads.
-\item MHG 97,7 \% value of observed heads.
-\item GHG 84,1 \% value of observed heads.
-\item GG 50\% value of observed heads.
-\item GLG 15,9\% value of observed heads.
-\item MLG 2,3\% value of observed heads.
-\item ALG 0,15\% value of observed heads.
+\item AHG & AHG_MV 99,85 \% value of observed heads (relative to REF, relative to soil surface level).
+\item MHG & MHG_MV 97,7 \% value of observed heads (relative to REF, relative to soil surface level).
+\item GHG & GHG_MV  84,1 \% value of observed head (relative to REF, relative to soil surface level).
+\item GG & GG_MV 50\% value of observed heads (relative to REF, relative to soil surface level).
+\item GLG & GLG_MV 15,9\% value of observed heads (relative to REF, relative to soil surface level).
+\item MLG & MLG_MV 2,3\% value of observed heads (relative to REF, relative to soil surface level).
+\item ALG & ALG_MV 0,15\% value of observed heads (relative to REF, relative to soil surface level).
 \item n Number of observations used to calculate percentile values.
 }
 }
@@ -26,11 +26,14 @@ Characteristics of monitoring well (meta data, \code{\link{hm_read_export_csv}})
 Percentile values of observed groundwater heads are calculated according to:
 }
 \details{
-\href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
-Stromingen 15 (2009) nummer 3 p29-34.}
+GxG's of observations of every filter is calculated.
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 gxg <- hm_calc_gxg(hm)
+}
+\seealso{
+\code{link{hm_gxg_table}}
+\href{https://edepot.wur.nl/175881}{'Een alternatieve GHG analyse' Drs. D.H. Edelman, Ir. A.S. Burger
+Stromingen 15 (2009) nummer 3 p29-34.}
 }

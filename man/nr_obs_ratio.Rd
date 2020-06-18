@@ -21,7 +21,6 @@ tible with fields:
 Ratio's (# observations in filter) / (average # of observations in monitoring well)
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 r <- nr_obs_ratio(hm)
 }

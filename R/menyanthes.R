@@ -12,7 +12,7 @@
 #' * \code{\link{hm_rm_dble_obs}}
 #' * \code{\link{hm_plot}}
 #' * \code{\link{hm_calc_gxg}}
-#' * \code{\link{hm_create_shp_file}}
+#' * \code{\link{hm_create_shp}}
 #' * \code{\link{nr_obs_ratio}}
 #'
 #' This functions exports the following sample data sets:
@@ -40,6 +40,10 @@
 #' @importFrom dplyr summarise
 #' @importFrom dplyr left_join
 #' @importFrom dplyr do
+#' @importFrom dplyr n
+#' @importFrom dplyr mutate
+#' @importFrom dplyr slice
+#' @importFrom dplyr full_join
 #'
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 aes

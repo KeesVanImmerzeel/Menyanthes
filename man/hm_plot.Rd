@@ -23,8 +23,7 @@ Create a list of timeseries plots of all HydroMonitor Observationwell data
 (\code{\link{hm_read_export_csv}}).
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 x <- hm_plot(hm)
 x$NAME[1]
 x$plots[[1]]

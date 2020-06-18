@@ -16,7 +16,6 @@ HydroMonitor ObservationWell data with double records removed.
 Remove double observations in HydroMonitor ObservationWell data.
 }
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm <- hm_read_export_csv( fname )
+hm <- hm1
 hm_clean <- hm_rm_dble_obs( hm )
 }
