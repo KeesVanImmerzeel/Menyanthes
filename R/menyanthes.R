@@ -1,5 +1,6 @@
 #' menyanthes: A package read / write / manipulate \href{https://www.kwrwater.nl/tools-producten/hydromonitor/}{HydroMonitor} Observationwell data.
 #'
+#'
 #' This package exports the following functions:
 #'
 #' * \code{\link{hm_read_export_csv}}
@@ -13,6 +14,10 @@
 #' * \code{\link{hm_calc_gxg}}
 #' * \code{\link{hm_create_shp_file}}
 #' * \code{\link{nr_obs_ratio}}
+#'
+#' This functions exports the following sample data sets:
+#' hm1: HydroMonitor ObservationWell Data
+#' hm2: HydroMonitor ObservationWell Data
 #'
 #' @docType package
 #' @name menyanthes
