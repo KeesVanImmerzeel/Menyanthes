@@ -149,12 +149,23 @@ hm_calc_gxg <- function(hm) {
 #' x$plots[[1]]
 #' @export
 hm_plot <- function(hm, output_dir = NULL) {
+  hm$xd %<>% dplyr::full_join(hm$xm, by = c("NAME", "FILTER"))
   hm$xd$FILTER %<>% as.factor()
   x <- suppressWarnings(
     hm$xd %>% dplyr::group_by(NAME) %>% dplyr::do(
       plots = ggplot2::ggplot(data = .) +
         ggplot2::aes(x = DATE, y = HEAD, color = FILTER) +
         ggplot2::geom_point() +
+        ggplot2::geom_line() +
+        ggplot2::geom_hline(yintercept = .$MV[1], colour = "brown") +
+        ggplot2::annotate(
+          "text",
+          min(.$DATE),
+          .$MV[1],
+          vjust = -0.5,
+          label = "Surf. level",
+          colour = "brown"
+        ) +
         ggplot2::ggtitle(unique(.$NAME))
     )
   )

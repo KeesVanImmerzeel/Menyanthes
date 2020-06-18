@@ -2,14 +2,14 @@
 % Please edit documentation in R/hm_utilitys.R
 \name{hm_rbind}
 \alias{hm_rbind}
-\title{Merge two HydroMonitor ObservationWell data objects.}
+\title{Merge HydroMonitor ObservationWell data objects.}
 \usage{
-hm_rbind(hm1, hm2)
+hm_rbind(..., hm_list = NULL)
 }
 \arguments{
-\item{hm1}{First HydroMonitor ObservationWell data object to be merged.}
+\item{...}{HydroMonitor ObservationWell data objects.}
 
-\item{hm2}{Second HydroMonitor ObservationWell data object to be merged.}
+\item{hm_list}{Optional list of HydroMonitor ObservationWell data objects.}
 }
 \value{
 HydroMonitor ObservationWell data object.
@@ -17,8 +17,9 @@ HydroMonitor ObservationWell data object.
 \description{
 Bind rows of two HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
 }
+\details{
+Double observations and double filters are removed from the HMOW data.
+}
 \examples{
-fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-hm1 <- hm_read_export_csv( fname )
-
+hm <- hm_rbind(hm1, hm2)
 }
