@@ -21,4 +21,8 @@ This package exports the following functions:
 \item \code{\link{hm_create_shp_file}}
 \item \code{\link{nr_obs_ratio}}
 }
+
+This functions exports the following sample data sets:
+hm1: HydroMonitor ObservationWell Data
+hm2: HydroMonitor ObservationWell Data
 }

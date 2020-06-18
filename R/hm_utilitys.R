@@ -157,15 +157,7 @@ hm_plot <- function(hm, output_dir = NULL) {
         ggplot2::aes(x = DATE, y = HEAD, color = FILTER) +
         ggplot2::geom_point() +
         ggplot2::geom_line() +
-        ggplot2::geom_hline(yintercept = .$MV[1], colour = "brown") +
-        ggplot2::annotate(
-          "text",
-          min(.$DATE),
-          .$MV[1],
-          vjust = -0.5,
-          label = "Surf. level",
-          colour = "brown"
-        ) +
+        ggplot2::geom_hline(yintercept = .$MV[1], linetype = "longdash", colour = "brown") +
         ggplot2::ggtitle(unique(.$NAME))
     )
   )
@@ -176,7 +168,13 @@ hm_plot <- function(hm, output_dir = NULL) {
     n <- length(x$NAME)
     for (i in 1:n) {
       mypath <- file.path(output_dir, paste(x$NAME[i], ".jpg", sep = ""))
-      ggplot2::ggsave(filename = mypath, x$plots[[i]])
+      ggplot2::ggsave(
+        filename = mypath,
+        x$plots[[i]],
+        width = 16,
+        height = 8,
+        units = "cm"
+      )
     }
   }
   return(x)
