@@ -2,6 +2,7 @@
 
 export(hm_calc_gxg)
 export(hm_create_shp)
+export(hm_filter_on_extent)
 export(hm_filter_on_year)
 export(hm_gxg_table)
 export(hm_plot)

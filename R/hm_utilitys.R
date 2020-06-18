@@ -35,6 +35,33 @@ hm_filter_on_year <- function( hm, minyear=1900, maxyear=3000 ) {
   return(hm)
 }
 
+#' Filter HydroMonitor ObservationWell data on extent.
+#'
+#' @inheritParams hm_rm_fltrs_with_no_obs
+#' @param e: Extent object or a Raster* or Spatial* object
+#' @return Filtered HydroMonitor ObservationWell data
+#' @examples
+#' hm <- hm1
+#' xmin <- min(hm$xm$X)
+#' xmax <- max(hm$xm$X)
+#' ymin <- min(hm$xm$Y)
+#' ymax <- max(hm$xm$Y)
+#' dx <- (xmax-xmin)/10
+#' dy <- (ymax-ymin)/10
+#' e <- raster::extent(c(xmin+dx, xmax-dx, ymin+dy, ymax-dy))
+#' hm_filtered <- hm_filter_on_extent(hm, e)
+#' @export
+hm_filter_on_extent <- function(hm, e) {
+  if (!is.null(e)) {
+    #Filter meta data gegevens op extent
+    hm$xm %<>% dplyr::filter(X >= e@xmin &
+                               X <= e@xmax & Y >= e@ymin & Y <= e@ymax)
+    #Filter stijghoogte gegevens
+    hm$xd %<>% dplyr::semi_join(hm$xm, by = "NAME")
+  }
+  return(hm)
+}
+
 #' Remove double filter information in meta data part of HydroMonitor ObservationWell data
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return HydroMonitor ObservationWell data with double filter information remove from meta data part of
