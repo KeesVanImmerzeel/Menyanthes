@@ -171,23 +171,31 @@ hm_plot <- function(hm, output_dir = NULL) {
   return(x)
 }
 
-#' Merge two HydroMonitor ObservationWell data objects.
+#' Merge HydroMonitor ObservationWell data objects.
 #'
 #' Bind rows of two HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
 #'
-#' @param hm1 First HydroMonitor ObservationWell data object to be merged.
-#' @param hm2 Second HydroMonitor ObservationWell data object to be merged.
+#' @param ... HydroMonitor ObservationWell data objects.
+#' @param hm_list Optional list of HydroMonitor ObservationWell data objects.
 #' @return HydroMonitor ObservationWell data object.
-#'
+#' @details Double observations and double filters are removed from the HMOW data.
 #' @examples
-#' fname <- system.file("extdata","export_data_menyanthes.csv",package="menyanthes")
-#' hm1 <- hm_read_export_csv( fname )
-#'
+#' hm <- hm_rbind(hm1, hm2)
 #' @export
-hm_rbind <-function(hm1, hm2) {
-  hm <- list()
-  hm$xm <- rbind(hm1$xm,hm2$xm)
-  hm$xd <- rbind(hm1$xd,hm2$xd)
+hm_rbind <- function(..., hm_list = NULL) {
+  hm_list <- c(list(...), hm_list)
+  n <- length(hm_list)
+  hm <- NA
+  if (n == 1) {
+    hm <- hm_list[[1]]
+  } else if (n > 1) {
+    hm <- list()
+    hm$xm <- rbind(hm_list[[1]]$xm, hm_list[[2]]$xm)
+    hm$xd <- rbind(hm_list[[1]]$xd, hm_list[[2]]$xd)
+    if (n > 2) {
+      hm %<>% hm_rbind(hm_list[-c(1, 2)])
+    }
+  }
   hm %<>% hm_rm_dble_obs() %>% hm_rm_dble_fltrs()
   return(hm)
 }
