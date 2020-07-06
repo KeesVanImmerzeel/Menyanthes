@@ -88,6 +88,9 @@ hm_read_export_csv <- function(fname) {
   xm$V19 <- NULL
   names(xm) <- names_xm
   xm$FilterNo <- suppressWarnings(as.integer(xm$FilterNo))
+  if (all(is.na(xm$FilterNo)==TRUE)) {
+    stop("No filter numbers specified in csv-file.")
+  }
   xm <- xm[!is.na(xm$FilterNo),]
   xm$StartDateTime <- lubridate::dmy_hm(xm$StartDateTime)
 
