@@ -11,6 +11,8 @@ This package exports the following functions:
 \itemize{
 \item \code{\link{hm_read_export_csv}}
 \item \code{\link{hm_read_export_csv2}}
+\item \code{\link{hm_read_dino}}
+\item \code{\link{hm_read_dino_path}}
 \item \code{\link{hm_filter_on_year}}
 \item \code{\link{hm_filter_on_extent}}
 \item \code{\link{hm_rm_fltrs_with_no_obs}}
@@ -23,7 +25,6 @@ This package exports the following functions:
 \item \code{\link{nr_obs_ratio}}
 }
 
-This functions exports the following sample data sets:
-hm1: HydroMonitor ObservationWell Data
-hm2: HydroMonitor ObservationWell Data
+This package exports the following sample data sets:
+hm1, ..., hm4: HydroMonitor ObservationWell Data.
 }

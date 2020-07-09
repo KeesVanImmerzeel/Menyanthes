@@ -7,7 +7,7 @@
 hm_read_export_csv2(fname)
 }
 \arguments{
-\item{fname}{Filename of export of HydroMonitor file with Observationwell data (csv file, character)}
+\item{fname}{Filename (csv file, character)}
 }
 \value{
 List of 2:
@@ -22,9 +22,9 @@ Variables in data.frame xm:
 \item FILTER Filter number (integer)
 \item X x-coordinate of observationwell (numeric)
 \item Y y-coordinate of observationwell (numeric)
-\item TOP Level of the top of filter (numeric)
-\item BOT Level of the bottom of filter (numeric)
-\item MV Surface level (numeric)
+\item TOP Level of the top of filter (m+REF, numeric)
+\item BOT Level of the bottom of filter (m+REF,numeric)
+\item MV Surface level (m+REF,numeric)
 }
 
 Variables in data.frame xd:

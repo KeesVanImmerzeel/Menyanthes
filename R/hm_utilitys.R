@@ -64,7 +64,7 @@ hm_filter_on_extent <- function(hm, e) {
 
 #' Remove double filter information in meta data part of HydroMonitor ObservationWell data
 #' @inheritParams hm_rm_fltrs_with_no_obs
-#' @return HydroMonitor ObservationWell data with double filter information remove from meta data part of
+#' @return HydroMonitor ObservationWell data with double filter information removed from meta data part of
 #'   HydroMonitor ObservationWell data \code{\link{hm_read_export_csv}}
 #' @examples
 #' hm <- hm1
@@ -225,27 +225,22 @@ hm_plot <- function(hm, output_dir = NULL) {
 
 #' Merge HydroMonitor ObservationWell data objects.
 #'
-#' Bind rows of two HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
+#' Merge HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
 #'
-#' @param ... HydroMonitor ObservationWell data objects.
-#' @param hm_list Optional list of HydroMonitor ObservationWell data objects.
+#' @param hm_list List of HydroMonitor ObservationWell (HMOW) data objects.
 #' @return HydroMonitor ObservationWell data object.
 #' @details Double observations and double filters are removed from the HMOW data.
 #' @examples
-#' hm <- hm_rbind(hm1, hm2)
+#' hm <- hm_rbind(list(hm1, hm2))
 #' @export
-hm_rbind <- function(..., hm_list = NULL) {
-  hm_list <- c(list(...), hm_list)
-  n <- length(hm_list)
+hm_rbind <- function(hm_list) {
   hm <- NA
-  if (n == 1) {
+  n <- length(hm_list)
+  if (n>0) {
     hm <- hm_list[[1]]
-  } else if (n > 1) {
-    hm <- list()
-    hm$xm <- rbind(hm_list[[1]]$xm, hm_list[[2]]$xm)
-    hm$xd <- rbind(hm_list[[1]]$xd, hm_list[[2]]$xd)
-    if (n > 2) {
-      hm %<>% hm_rbind(hm_list[-c(1, 2)])
+    for (i in 2:n) {
+      hm$xm %<>% rbind(hm_list[[i]]$xm)
+      hm$xd %<>% rbind(hm_list[[i]]$xd)
     }
   }
   hm %<>% hm_rm_dble_obs() %>% hm_rm_dble_fltrs()

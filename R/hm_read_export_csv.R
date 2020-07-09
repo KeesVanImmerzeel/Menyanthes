@@ -13,7 +13,7 @@ remove_trailing_letter <- function(x) {
 #'
 #' Trailing letters of observation well are removed.
 #'
-#' @param fname Filename of export of HydroMonitor file with Observationwell data (csv file, character)
+#' @param fname Filename (csv file, character)
 #' @return List of 2:
 #'
 #' * xm Characteristics of the monitoring well (meta data).
@@ -24,9 +24,9 @@ remove_trailing_letter <- function(x) {
 #' * FILTER Filter number (integer)
 #' * X x-coordinate of observationwell (numeric)
 #' * Y y-coordinate of observationwell (numeric)
-#' * TOP Level of the top of filter (numeric)
-#' * BOT Level of the bottom of filter (numeric)
-#' * MV Surface level (numeric)
+#' * TOP Level of the top of filter (m+REF, numeric)
+#' * BOT Level of the bottom of filter (m+REF,numeric)
+#' * MV Surface level (m+REF,numeric)
 #'
 #' Variables in data.frame xd:
 #' * NAME Name of observationwell (character)

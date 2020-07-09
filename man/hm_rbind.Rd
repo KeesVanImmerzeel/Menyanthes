@@ -4,22 +4,20 @@
 \alias{hm_rbind}
 \title{Merge HydroMonitor ObservationWell data objects.}
 \usage{
-hm_rbind(..., hm_list = NULL)
+hm_rbind(hm_list)
 }
 \arguments{
-\item{...}{HydroMonitor ObservationWell data objects.}
-
-\item{hm_list}{Optional list of HydroMonitor ObservationWell data objects.}
+\item{hm_list}{List of HydroMonitor ObservationWell (HMOW) data objects.}
 }
 \value{
 HydroMonitor ObservationWell data object.
 }
 \description{
-Bind rows of two HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
+Merge HydroMonitor ObservationWell data objects (\code{\link{hm_read_export_csv}}).
 }
 \details{
 Double observations and double filters are removed from the HMOW data.
 }
 \examples{
-hm <- hm_rbind(hm1, hm2)
+hm <- hm_rbind(list(hm1, hm2))
 }

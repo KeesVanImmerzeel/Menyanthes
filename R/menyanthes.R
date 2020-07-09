@@ -5,6 +5,8 @@
 #'
 #' * \code{\link{hm_read_export_csv}}
 #' * \code{\link{hm_read_export_csv2}}
+#' * \code{\link{hm_read_dino}}
+#' * \code{\link{hm_read_dino_path}}
 #' * \code{\link{hm_filter_on_year}}
 #' * \code{\link{hm_filter_on_extent}}
 #' * \code{\link{hm_rm_fltrs_with_no_obs}}
@@ -16,9 +18,8 @@
 #' * \code{\link{hm_create_shp}}
 #' * \code{\link{nr_obs_ratio}}
 #'
-#' This functions exports the following sample data sets:
-#' hm1: HydroMonitor ObservationWell Data
-#' hm2: HydroMonitor ObservationWell Data
+#' This package exports the following sample data sets:
+#' hm1, ..., hm4: HydroMonitor ObservationWell Data.
 #'
 #' @docType package
 #' @name menyanthes
@@ -28,6 +29,7 @@
 #'
 #' @importFrom utils read.csv
 #' @importFrom utils read.csv2
+#' @importFrom utils glob2rx
 #'
 #' @importFrom lubridate dmy_hm
 #' @importFrom lubridate dmy_hms
