@@ -65,7 +65,8 @@ hm_read_dino <-  function(fname) {
 
 #' Read all export Dino *_1.csv files with measured heads in specified folder.
 #'
-#' @param path a character vector containing a single path name. Tilde expansion (see \code{\link{path.expand}}) is done.
+#' @inherit hm_read_export_csv
+#' @param path A character vector containing a single path name. Tilde expansion (see \code{\link{path.expand}}) is done.
 #' @examples
 #' path <- system.file("extdata","Grondwaterstanden_Put",package="menyanthes")
 #' hm4 <- hm_read_dino_path( path )
@@ -86,6 +87,29 @@ hm_read_dino_path <-  function(path) {
   if (nrow(fnames)<1) {
     stop('No filename matching the pattern *_1.csv found in specified folder.')
   }
-  x <- apply(fnames, MARGIN = 1, hm_read_dino) %>% hm_rbind()
-  return(x)
+  hm <- apply(fnames, MARGIN = 1, hm_read_dino) %>% hm_rbind()
+  return(hm)
+}
+
+#' Read all export Dino *_1.csv files with measured heads from zip file.
+#'
+#' @inherit hm_read_export_csv
+#' @examples
+#' fname <- system.file("extdata","Dino_export_18032020.zip",package="menyanthes")
+#' hm5 <- hm_read_dino_zip( fname )
+#' @export
+hm_read_dino_zip <-  function(fname) {
+  if (!file.exists(fname)) {
+    stop('Specified path does not exist.')
+  }
+  extdir <- paste0(path.expand("~"), "/tmp_hm_read_dino_zip") # Temporary folder
+  unzip(
+    fname,
+    overwrite = TRUE,
+    junkpaths = TRUE,
+    exdir = extdir
+  )
+  hm <- hm_read_dino_path(extdir)
+  unlink(extdir, recursive = TRUE, force = TRUE, expand = TRUE) # Remove temporary folder
+  return(hm)
 }

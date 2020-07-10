@@ -8,3 +8,7 @@ test_that("Reading all export Dino *_1.csv files with measured heads in specifie
   expect_equal(hm_read_dino_path( path ), hm4)
 })
 
+test_that("Reading measured heads from zip file.with hm_read_dino_zip() results in previously created object.", {
+  fname <- system.file("extdata","Dino_export_18032020.zip",package="menyanthes")
+  expect_equal(hm_read_dino_zip( fname ), hm5)
+})

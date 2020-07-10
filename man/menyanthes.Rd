@@ -13,6 +13,7 @@ This package exports the following functions:
 \item \code{\link{hm_read_export_csv2}}
 \item \code{\link{hm_read_dino}}
 \item \code{\link{hm_read_dino_path}}
+\item \code{\link{hm_read_dino_zip}}
 \item \code{\link{hm_filter_on_year}}
 \item \code{\link{hm_filter_on_extent}}
 \item \code{\link{hm_rm_fltrs_with_no_obs}}
@@ -26,5 +27,5 @@ This package exports the following functions:
 }
 
 This package exports the following sample data sets:
-hm1, ..., hm4: HydroMonitor ObservationWell Data.
+hm1, ..., hm5: HydroMonitor ObservationWell Data.
 }

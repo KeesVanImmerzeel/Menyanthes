@@ -21,3 +21,9 @@
 #' Sample dataset read from Dino *_1.csv files in specified folder.
 #'
 "hm4"
+
+#' Measured heads read from Dino zip file.
+#'
+#' Sample dataset read with Measured heads read from Dino zip file.
+#'
+"hm5"
