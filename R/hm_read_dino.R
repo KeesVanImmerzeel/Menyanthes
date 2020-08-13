@@ -65,7 +65,6 @@ hm_read_dino <-  function(fname) {
 
 #' Read all export Dino *_1.csv files with measured heads in specified folder.
 #'
-#' @inherit hm_read_export_csv
 #' @param path A character vector containing a single path name. Tilde expansion (see \code{\link{path.expand}}) is done.
 #' @examples
 #' path <- system.file("extdata","Grondwaterstanden_Put",package="menyanthes")

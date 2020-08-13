@@ -9,34 +9,8 @@ hm_read_dino_path(path)
 \arguments{
 \item{path}{A character vector containing a single path name. Tilde expansion (see \code{\link{path.expand}}) is done.}
 }
-\value{
-List of 2:
-\itemize{
-\item xm Characteristics of the monitoring well (meta data).
-\item xd Measured heads (data.frame).
-}
-
-Variables in data.frame xm:
-\itemize{
-\item NAME Name of observationwell.  (character)
-\item FILTER Filter number (integer)
-\item X x-coordinate of observationwell (numeric)
-\item Y y-coordinate of observationwell (numeric)
-\item TOP Level of the top of filter (m+REF, numeric)
-\item BOT Level of the bottom of filter (m+REF,numeric)
-\item MV Surface level (m+REF,numeric)
-}
-
-Variables in data.frame xd:
-\itemize{
-\item NAME Name of observationwell (character)
-\item FILTER Filter number (integer)
-\item DATE Date of observation (POSIXct)
-\item HEAD Observed head (numeric)
-}
-}
 \description{
-Trailing letters of observation well are removed.
+Read all export Dino *_1.csv files with measured heads in specified folder.
 }
 \examples{
 path <- system.file("extdata","Grondwaterstanden_Put",package="menyanthes")

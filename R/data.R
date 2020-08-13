@@ -27,3 +27,13 @@
 #' Sample dataset read with Measured heads read from Dino zip file.
 #'
 "hm5"
+
+#'Polygon shape to be used in examples.
+#'
+#' Polygon shape to be used in examples, for example the function hm_filter_on_poly.
+#'
+"polygn"
+
+
+
+

@@ -5,9 +5,14 @@
 \alias{menyanthes}
 \title{menyanthes: A package read / write / manipulate \href{https://www.kwrwater.nl/tools-producten/hydromonitor/}{HydroMonitor} Observationwell data.}
 \description{
-This package exports the following functions:
+Code to recreate internal data in R/sysdata.rda.
 }
 \details{
+crsAfoort <- sp::CRS("+init=epsg:28992") # epsg projection 28992 - amersfoort
+hm_filtered_on_polygon <- hm_filter_on_poly( hm1, polygn )
+use_data(crsAfoort, hm_filtered_on_polygon, internal=TRUE, overwrite=TRUE)
+
+This package exports the following functions:
 \itemize{
 \item \code{\link{hm_read_export_csv}}
 \item \code{\link{hm_read_export_csv2}}
@@ -16,6 +21,7 @@ This package exports the following functions:
 \item \code{\link{hm_read_dino_zip}}
 \item \code{\link{hm_filter_on_year}}
 \item \code{\link{hm_filter_on_extent}}
+\item \code{\link{hm_filter_on_poly}}
 \item \code{\link{hm_rm_fltrs_with_no_obs}}
 \item \code{\link{hm_rbind}}
 \item \code{\link{hm_rm_dble_fltrs}}
@@ -27,5 +33,6 @@ This package exports the following functions:
 }
 
 This package exports the following sample data sets:
-hm1, ..., hm5: HydroMonitor ObservationWell Data.
+hm1, ...,hm5: HydroMonitor ObservationWell Data.
+polygn: Polygon shape used in examples.
 }

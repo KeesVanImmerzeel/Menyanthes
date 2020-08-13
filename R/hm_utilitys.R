@@ -247,9 +247,9 @@ hm_rbind <- function(hm_list) {
   return(hm)
 }
 
-#' Create a shape file from HydroMonitor ObservationWell data object.
+#' Create a point shape file from HydroMonitor ObservationWell data object.
 #'
-#' Create a summarizing shape file from the meta data part of HydroMonitor ObservationWell data object.
+#' Create a summarizing point shape file from the meta data part of HydroMonitor ObservationWell data object.
 #'
 #' (\code{\link{hm_read_export_csv}}).
 #' @inheritParams hm_rm_fltrs_with_no_obs
@@ -284,4 +284,37 @@ hm_create_shp <- function(hm, filename) {
   sp::coordinates(x) <- ~ X + Y
   sp::proj4string(x) <- crsAfoort
   raster::shapefile(x, filename, overwrite = TRUE)
+}
+
+#' Filter HydroMonitor ObservationWell data with polygon shape.
+#'
+#' @inheritParams hm_filter_on_extent
+#' @param p Polygon shape
+#' @return HydroMonitor ObservationWell data within polygon shape.
+#' @details Only polygon shapes of length=1 can be used.
+#' @examples
+#' hm <- hm1
+#' p <- polygn
+#' hm_filtered_on_polygon <- hm_filter_on_poly(hm, p)
+#' @export
+hm_filter_on_poly <- function(hm, p) {
+  if (length(p)==1) { # single polygon
+    # Create a shape file from HydroMonitor ObservationWell data object.
+    filename <-  file.path(path.expand("~"),"tmp.shp")
+    hm_create_shp( hm, filename)
+    hmpointshape <- raster::shapefile(filename)
+
+    # Make sure the point shape and polygon shape have the same CRS
+    p %<>% sp::spTransform(crsAfoort)
+    hmpointshape %<>% sp::spTransform(crsAfoort)
+
+    # Spatial overlay
+    i <- sp::over(hmpointshape, p, returnList = FALSE, fn = NULL)
+    sel_names <- hmpointshape@data$NAME[!is.na(i)]
+
+    #Filter meta data gegevens en stijghoogte gegevens
+    hm$xm %<>% dplyr::filter(NAME %in% sel_names )
+    hm$xd %<>% dplyr::semi_join(hm$xm, by = "NAME")
+  }
+  return(hm)
 }

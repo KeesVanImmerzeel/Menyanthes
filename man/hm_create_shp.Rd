@@ -2,7 +2,7 @@
 % Please edit documentation in R/hm_utilitys.R
 \name{hm_create_shp}
 \alias{hm_create_shp}
-\title{Create a shape file from HydroMonitor ObservationWell data object.}
+\title{Create a point shape file from HydroMonitor ObservationWell data object.}
 \usage{
 hm_create_shp(hm, filename)
 }
@@ -15,7 +15,7 @@ hm_create_shp(hm, filename)
 Nothing is returned when writing a shapeﬁle.
 }
 \description{
-Create a summarizing shape file from the meta data part of HydroMonitor ObservationWell data object.
+Create a summarizing point shape file from the meta data part of HydroMonitor ObservationWell data object.
 }
 \details{
 (\code{\link{hm_read_export_csv}}).
