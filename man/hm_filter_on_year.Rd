@@ -7,7 +7,7 @@
 hm_filter_on_year(hm, minyear = 1900, maxyear = 3000)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 
 \item{minyear}{Minimal year to read data from (integer)}
 

@@ -7,7 +7,7 @@
 hm_filter_on_extent(hm, e)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 
 \item{e}{Extent object or a Raster* or Spatial* object}
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{hm2}
 \alias{hm2}
-\title{HydroMonitor ObservationWell Data With Missing Header}
+\title{HydroMonitor Observation Well Data}
 \format{
 An object of class \code{list} of length 2.
 }
@@ -11,6 +11,6 @@ An object of class \code{list} of length 2.
 hm2
 }
 \description{
-Sample dataset read with hm_read_export_csv2(). First line is blank.
+Example dataset 2 to be used in examples
 }
 \keyword{datasets}

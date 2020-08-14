@@ -7,7 +7,7 @@
 hm_gxg_table(hm)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 }
 \value{
 Tibble with parameters as specified in \code{link{hm_calc_gxg}}.

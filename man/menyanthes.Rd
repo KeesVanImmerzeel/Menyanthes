@@ -5,13 +5,13 @@
 \alias{menyanthes}
 \title{menyanthes: A package read / write / manipulate \href{https://www.kwrwater.nl/tools-producten/hydromonitor/}{HydroMonitor} Observationwell data.}
 \description{
-Code to recreate internal data in R/sysdata.rda.
+This package exports the following sample data sets/objects:
+\itemize{
+\item hm1, hm2: HydroMonitor ObservationWell Data.
+\item polygn: Polygon shape used in examples.
+}
 }
 \details{
-crsAfoort <- sp::CRS("+init=epsg:28992") # epsg projection 28992 - amersfoort
-hm_filtered_on_polygon <- hm_filter_on_poly( hm1, polygn )
-use_data(crsAfoort, hm_filtered_on_polygon, internal=TRUE, overwrite=TRUE)
-
 This package exports the following functions:
 \itemize{
 \item \code{\link{hm_read_export_csv}}
@@ -31,8 +31,4 @@ This package exports the following functions:
 \item \code{\link{hm_create_shp}}
 \item \code{\link{nr_obs_ratio}}
 }
-
-This package exports the following sample data sets:
-hm1, ...,hm5: HydroMonitor ObservationWell Data.
-polygn: Polygon shape used in examples.
 }

@@ -7,7 +7,7 @@
 hm_plot(hm, output_dir = NULL)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 
 \item{output_dir}{folder name to write plot (character). If NULL, plots are not written do disk.}
 }

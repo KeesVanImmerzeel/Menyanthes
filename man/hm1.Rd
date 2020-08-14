@@ -3,7 +3,7 @@
 \docType{data}
 \name{hm1}
 \alias{hm1}
-\title{HydroMonitor ObservationWell Data}
+\title{HydroMonitor Observation Well Data}
 \format{
 An object of class \code{list} of length 2.
 }
@@ -11,6 +11,6 @@ An object of class \code{list} of length 2.
 hm1
 }
 \description{
-Sample dataset read with hm_read_export_csv()
+Example dataset 1 to be used in examples,
 }
 \keyword{datasets}

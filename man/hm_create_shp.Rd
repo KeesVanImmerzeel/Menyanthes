@@ -4,12 +4,15 @@
 \alias{hm_create_shp}
 \title{Create a point shape file from HydroMonitor ObservationWell data object.}
 \usage{
-hm_create_shp(hm, filename)
+hm_create_shp(hm, filename, crs = "+init=epsg:28992")
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 
 \item{filename}{(character)}
+
+\item{crs}{Character or object of class 'CRS'. PROJ.4 description of the coordinate reference system.
+Default CRS is "Amersfoort / RD new".}
 }
 \value{
 Nothing is returned when writing a shapeﬁle.

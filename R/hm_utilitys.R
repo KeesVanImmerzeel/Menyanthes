@@ -1,9 +1,6 @@
-# Internal data definition
-# crsAfoort <- sp::CRS("+init=epsg:28992") # epsg projection 28992 - amersfoort
-
 #' Remove meta data of filters if there are no observations available.
 #'
-#' @param hm HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}
+#' @param hm HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}
 #' @return HydroMonitor ObservationWell data where in meta data filters with no observations are removed.
 #' @examples
 #' hm <- hm1
@@ -254,6 +251,8 @@ hm_rbind <- function(hm_list) {
 #' (\code{\link{hm_read_export_csv}}).
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @param filename (character)
+#' @param crs Character or object of class 'CRS'. PROJ.4 description of the coordinate reference system.
+#'        Default CRS is "Amersfoort / RD new".
 #' @return  Nothing is returned when writing a shapeﬁle.
 #' @details Fields in the attribute table of the resulting shapefile are:
 #'
@@ -264,12 +263,13 @@ hm_rbind <- function(hm_list) {
 #' * TOP: Level of the top of the highest filter.
 #' * BOT: Level of the bottom of the lowest filter.
 #' * MV: Surface level.
+#'
 #' @examples
 #' hm <- hm1
 #' filename <- file.path(path.expand("~"),"filename.shp")
 #' hm_create_shp(hm, filename)
 #' @export
-hm_create_shp <- function(hm, filename) {
+hm_create_shp <- function(hm, filename, crs="+init=epsg:28992") {
   gxg_table <- hm %>% hm_gxg_table()
 
   x <- hm$xm %>% dplyr::group_by(NAME) %>% dplyr::summarise(
@@ -282,13 +282,13 @@ hm_create_shp <- function(hm, filename) {
   )
   x %<>% dplyr::left_join(gxg_table,by="NAME")
   sp::coordinates(x) <- ~ X + Y
-  sp::proj4string(x) <- crsAfoort
+  sp::proj4string(x) <- crs
   raster::shapefile(x, filename, overwrite = TRUE)
 }
 
 #' Filter HydroMonitor ObservationWell data with polygon shape.
 #'
-#' @inheritParams hm_filter_on_extent
+#' @inheritParams hm_create_shp
 #' @param p Polygon shape
 #' @return HydroMonitor ObservationWell data within polygon shape.
 #' @details Only polygon shapes of length=1 can be used.
@@ -297,7 +297,7 @@ hm_create_shp <- function(hm, filename) {
 #' p <- polygn
 #' hm_filtered_on_polygon <- hm_filter_on_poly(hm, p)
 #' @export
-hm_filter_on_poly <- function(hm, p) {
+hm_filter_on_poly <- function(hm, p, crs="+init=epsg:28992") {
   if (length(p)==1) { # single polygon
     # Create a shape file from HydroMonitor ObservationWell data object.
     filename <-  file.path(path.expand("~"),"tmp.shp")
@@ -305,8 +305,8 @@ hm_filter_on_poly <- function(hm, p) {
     hmpointshape <- raster::shapefile(filename)
 
     # Make sure the point shape and polygon shape have the same CRS
-    p %<>% sp::spTransform(crsAfoort)
-    hmpointshape %<>% sp::spTransform(crsAfoort)
+    p %<>% sp::spTransform(crs)
+    hmpointshape %<>% sp::spTransform(crs)
 
     # Spatial overlay
     i <- sp::over(hmpointshape, p, returnList = FALSE, fn = NULL)

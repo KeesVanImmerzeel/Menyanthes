@@ -7,7 +7,7 @@
 hm_rm_fltrs_with_no_obs(hm)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 }
 \value{
 HydroMonitor ObservationWell data where in meta data filters with no observations are removed.

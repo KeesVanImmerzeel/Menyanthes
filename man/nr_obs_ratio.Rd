@@ -7,7 +7,7 @@
 nr_obs_ratio(hm)
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 }
 \value{
 tible with fields:

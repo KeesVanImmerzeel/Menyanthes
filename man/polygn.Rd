@@ -3,7 +3,7 @@
 \docType{data}
 \name{polygn}
 \alias{polygn}
-\title{Polygon shape to be used in examples.}
+\title{Polygon shape object.}
 \format{
 An object of class \code{SpatialPolygonsDataFrame} with 1 rows and 1 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{SpatialPolygonsDataFrame} with 1 rows and 1 columns.
 polygn
 }
 \description{
-Polygon shape to be used in examples, for example the function hm_filter_on_poly.
+Polygon shape object to be used in examples.
 }
 \keyword{datasets}

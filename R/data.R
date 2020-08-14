@@ -1,39 +1,20 @@
-#' HydroMonitor ObservationWell Data
+#' HydroMonitor Observation Well Data
 #'
-#' Sample dataset read with hm_read_export_csv()
+#' Example dataset 1 to be used in examples,
 #'
 "hm1"
 
-#' HydroMonitor ObservationWell Data With Missing Header
+#' HydroMonitor Observation Well Data
 #'
-#' Sample dataset read with hm_read_export_csv2(). First line is blank.
+#' Example dataset 2 to be used in examples
 #'
 "hm2"
 
-#' Heads read from Dino *_1.csv file.
-#'
-#' Sample dataset read from Dino *_1.csv file.
-#'
-"hm3"
 
-#' Measured heads read from Dino *_1.csv files in specified folder.
+#' Polygon shape object.
 #'
-#' Sample dataset read from Dino *_1.csv files in specified folder.
-#'
-"hm4"
-
-#' Measured heads read from Dino zip file.
-#'
-#' Sample dataset read with Measured heads read from Dino zip file.
-#'
-"hm5"
-
-#'Polygon shape to be used in examples.
-#'
-#' Polygon shape to be used in examples, for example the function hm_filter_on_poly.
+#' Polygon shape object to be used in examples.
 #'
 "polygn"
-
-
 
 

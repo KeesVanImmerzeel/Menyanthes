@@ -4,12 +4,15 @@
 \alias{hm_filter_on_poly}
 \title{Filter HydroMonitor ObservationWell data with polygon shape.}
 \usage{
-hm_filter_on_poly(hm, p)
+hm_filter_on_poly(hm, p, crs = "+init=epsg:28992")
 }
 \arguments{
-\item{hm}{HydroMonitor ObservationWell data as read by \code{\link{hm_read_export_csv}}}
+\item{hm}{HydroMonitor Observation Well data as read by \code{\link{hm_read_export_csv}}}
 
 \item{p}{Polygon shape}
+
+\item{crs}{Character or object of class 'CRS'. PROJ.4 description of the coordinate reference system.
+Default CRS is "Amersfoort / RD new".}
 }
 \value{
 HydroMonitor ObservationWell data within polygon shape.
