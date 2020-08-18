@@ -11,5 +11,15 @@ hm5 <- hm_read_dino_zip( fname )
 
 hm_filtered_on_polygon <- hm_filter_on_poly( hm1, polygn )
 
+obs_periods <- hm_obs_periods( hm1 )
+
 ## Create file R/sysdata.rda
-usethis::use_data(hm3, hm4, hm5, hm_filtered_on_polygon, internal=TRUE, overwrite = TRUE)
+usethis::use_data(
+  hm3,
+  hm4,
+  hm5,
+  hm_filtered_on_polygon,
+  obs_periods,
+  internal = TRUE,
+  overwrite = TRUE
+)

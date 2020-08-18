@@ -11,6 +11,7 @@
 #' * \code{\link{hm_read_dino}}
 #' * \code{\link{hm_read_dino_path}}
 #' * \code{\link{hm_read_dino_zip}}
+#' * \code{\link{hm_obs_periods}}
 #' * \code{\link{hm_filter_on_year}}
 #' * \code{\link{hm_filter_on_extent}}
 #' * \code{\link{hm_filter_on_poly}}

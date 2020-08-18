@@ -22,6 +22,7 @@ Then load the package with:
 - `hm_read_dino()`: Read export Dino *_1.csv file with measured heads.
 - `hm_read_dino_path`: Read all export Dino *_1.csv files with measured heads in specified folder.
 - `hm_read_dino_zip`: Read all export Dino *_1.csv files with measured heads from zip file.
+- `hm_obs_periods`: Create data frame with observation period for each filter.
 - `hm_filter_on_year()`: Filter HydroMonitor ObservationWell data on year.
 - `hm_filter_on_pol()`: Filter HydroMonitor ObservationWell data with polygon shape.
 - `hm_calc_gxg()`: Calculate GxG's of HydroMonitor ObservationWell data.

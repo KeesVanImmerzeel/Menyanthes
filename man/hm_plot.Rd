@@ -25,6 +25,6 @@ Create a list of timeseries plots of all HydroMonitor Observationwell data
 \examples{
 hm <- hm1
 x <- hm_plot(hm)
-x$NAME[1]
-x$plots[[1]]
+NAME <- x$NAME[3]
+x$plots[[which(x$NAME==NAME)]]
 }

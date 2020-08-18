@@ -19,6 +19,7 @@ This package exports the following functions:
 \item \code{\link{hm_read_dino}}
 \item \code{\link{hm_read_dino_path}}
 \item \code{\link{hm_read_dino_zip}}
+\item \code{\link{hm_obs_periods}}
 \item \code{\link{hm_filter_on_year}}
 \item \code{\link{hm_filter_on_extent}}
 \item \code{\link{hm_filter_on_poly}}
