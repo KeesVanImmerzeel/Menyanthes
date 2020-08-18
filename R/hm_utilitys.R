@@ -319,7 +319,7 @@ hm_filter_on_poly <- function(hm, p, crs="+init=epsg:28992") {
   return(hm)
 }
 
-#' Create data frame with observation period for each filter.
+#' Create a tibble with observation period for each filter.
 #'
 #' @inheritParams hm_rm_fltrs_with_no_obs
 #' @return Data frame with fields "min_date" and "max_date" (POSIXct)
