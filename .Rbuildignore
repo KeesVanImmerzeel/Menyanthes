@@ -1,3 +1,4 @@
 ^menyanthes\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+^appveyor\.yml$
