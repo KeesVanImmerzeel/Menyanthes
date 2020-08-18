@@ -2,7 +2,7 @@
 % Please edit documentation in R/hm_utilitys.R
 \name{hm_obs_periods}
 \alias{hm_obs_periods}
-\title{Create data frame with observation period for each filter.}
+\title{Create a tibble with observation period for each filter.}
 \usage{
 hm_obs_periods(hm)
 }
@@ -13,7 +13,7 @@ hm_obs_periods(hm)
 Data frame with fields "min_date" and "max_date" (POSIXct)
 }
 \description{
-Create data frame with observation period for each filter.
+Create a tibble with observation period for each filter.
 }
 \examples{
 hm_obs_periods( hm1 )
