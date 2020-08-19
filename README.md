@@ -7,6 +7,8 @@
 
 The goal of the package menyanthes is to read / write / manipulate [HydroMonitor](https://www.kwrwater.nl/tools-producten/hydromonitor/) Observationwell data. 
 
+![Rplot](https://user-images.githubusercontent.com/16401251/90610250-71ca0400-e205-11ea-8d81-149542d35b93.png)
+
 ## Installation
 
 You can install the released version of menyanthes from with:
