@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/KeesVanImmerzeel/menyanthes?branch=master&svg=true)](https://ci.appveyor.com/project/KeesVanImmerzeel/menyanthes)
+[![Travis build status](https://travis-ci.com/KeesVanImmerzeel/menyanthes.svg?branch=master)](https://travis-ci.com/KeesVanImmerzeel/menyanthes)
 <!-- badges: end -->
 
 The goal of the package menyanthes is to read / write / manipulate [HydroMonitor](https://www.kwrwater.nl/tools-producten/hydromonitor/) Observationwell data. 
